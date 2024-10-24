@@ -4,45 +4,35 @@ option go_package = "genproto/userservice";
 
 package userservice;
 
-import "user.proto";
+import "protos/user-service/user.proto";
 
 service AdminService {
   rpc CreateUser(CreateUserReq) returns (CreateUserRes);
-  rpc GetUser(GetUserReq) returns (GetUserRes);
+  rpc GetUserByID(GetUserByIDReq) returns (GetUserByIDRes);
   rpc ForgetPassword(ForgetPasswordReq) returns (ForgetPasswordRes);
   rpc GetAllUsers(GetAllUsersReq) returns (GetAllUsersRes);
   rpc DeleteUser(DeleteUserReq) returns (DeleteUserRes);
 }
 
-message AdminModel {
+
+message CreateUserReq {
   string id = 1;
-  string name = 2;
-  string email = 3;
-  string password = 4;
-  string created_at = 5;
-  string updated_at = 6;
-  string role = 7;
+  string fname = 2;
+  string lname = 3;
+  string email = 4;
+  string password = 5;
+}
+
+message CreateUserRes{
+  UserModel admin_res = 1;
 }
 
 
-
-message CreateAdminReq {
-  string id = 1;
-  string name = 2;
-  string email = 3;
-  string password = 4;
-}
-
-message CreateAdminRes{
-  AdminModel admin_res = 1;
-}
-
-
-message GetAUserReq {
+message GetUserByIDReq {
   string user_id = 1;
 }
 
-message GetUserRes {
+message GetUserByIDRes {
   UserModel user_res = 1;
 }
 
@@ -54,14 +44,16 @@ message ForgetPasswordRes {
   string message = 1;
 }
 
-message GetAllUserReq {
+message GetAllUsersReq {
   int32 limit = 1;
   int32 offset = 2;
   int32 total_count = 3;
+  UserModel user = 4;
 }
 
-message GetAllUserRes {
+message GetAllUsersRes {
   repeated UserModel users = 1;
+  int32 total_count = 2;
 }
 
 message DeleteUserReq {
