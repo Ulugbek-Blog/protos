@@ -1,0 +1,76 @@
+
+syntax="proto3";
+
+option  go_package = "genproto/userservice";
+
+package userservice;
+
+service UserService {
+  rpc RegisterUser(RegisterUserReq) returns (RegisterUserRes);
+  rpc Login(LoginReq) returns(LoginRes);
+  rpc ForgotPassword(ForgotPasswordReq) returns(ForgotPasswordRes);
+  rpc UpdateUser(UpdateUserReq) returns(UpdateUserRes);
+  rpc VerifyEmail(VerifyEmailReq) returns(VerifyEmailRes);
+}
+
+
+message UserModel{
+  string id = 1;
+  string fname = 2;
+  string lname = 3;
+  string email = 4;
+  string password = 5;
+  string bio = 6;
+  string phone = 7;
+  string profile_image = 8;
+  string role = 9;
+  string created_at = 10;
+  string updated_at = 11;
+}
+
+message RegisterUserReq{
+  string fname = 1;
+  string lname = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message RegisterUserRes{
+  UserModel UserRes = 1;
+}
+
+message LoginReq{
+  string email = 1;
+  string password = 2;
+}
+
+message LoginRes{
+  UserModel UserRes = 1;
+}
+
+message ForgotPasswordReq{
+  string email = 1;
+}
+
+message ForgotPasswordRes{
+  string message = 1;
+}
+
+message UpdateUserReq{
+  UserModel UserReq = 1;
+}
+
+message UpdateUserRes{
+  UserModel UserRes = 1;
+}
+
+message VerifyEmailReq{
+  string email = 1;
+}
+
+message VerifyEmailRes{
+  string access_token = 1;
+  string refresh_token = 2;
+  string expires_in = 3;
+  string message = 4;
+}

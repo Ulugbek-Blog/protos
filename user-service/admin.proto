@@ -1,0 +1,73 @@
+syntax="proto3";
+
+option go_package = "genproto/userservice";
+
+package userservice;
+
+import "user.proto";
+
+service AdminService {
+  rpc CreateUser(CreateUserReq) returns (CreateUserRes);
+  rpc GetUser(GetUserReq) returns (GetUserRes);
+  rpc ForgetPassword(ForgetPasswordReq) returns (ForgetPasswordRes);
+  rpc GetAllUsers(GetAllUsersReq) returns (GetAllUsersRes);
+  rpc DeleteUser(DeleteUserReq) returns (DeleteUserRes);
+}
+
+message AdminModel {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+  string created_at = 5;
+  string updated_at = 6;
+  string role = 7;
+}
+
+
+
+message CreateAdminReq {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string password = 4;
+}
+
+message CreateAdminRes{
+  AdminModel admin_res = 1;
+}
+
+
+message GetAUserReq {
+  string user_id = 1;
+}
+
+message GetUserRes {
+  UserModel user_res = 1;
+}
+
+message ForgetPasswordReq {
+  string admin_email = 1;
+}
+
+message ForgetPasswordRes {
+  string message = 1;
+}
+
+message GetAllUserReq {
+  int32 limit = 1;
+  int32 offset = 2;
+  int32 total_count = 3;
+}
+
+message GetAllUserRes {
+  repeated UserModel users = 1;
+}
+
+message DeleteUserReq {
+  string user_id = 1;
+}
+
+message DeleteUserRes {
+  string message = 1;
+}
